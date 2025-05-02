@@ -4,7 +4,12 @@ import { authMiddleware } from '../../../lib/auth';
 async function handler(req, res) {
   if (req.method === 'GET') {
     try {
+      const {authorId} = req.query;
+
+      const where = authorId ? { authorId } : {};
+
       const posts = await prisma.post.findMany({
+        where,
         include: {
           author: {
             select: {
