@@ -28,26 +28,26 @@ export default function Register() {
     e.preventDefault();
     setError(null);
     
-    // 表单验证
+    // form validation
     if (!formData.name || !formData.email || !formData.password) {
-      return setError('请填写所有必填字段');
+      return setError('Please fill in all required fields');
     }
     
     if (formData.password !== formData.confirmPassword) {
-      return setError('两次输入的密码不一致');
+      return setError('Passwords do not match');
     }
     
     setLoading(true);
     
     try {
-      // 调用注册API
+      // call register API
       await register({
         name: formData.name,
         email: formData.email,
         password: formData.password,
       });
       
-      // 注册成功后跳转到登录页
+      // redirect to login page after successful registration
       router.push('/login?registered=true');
     } catch (error) {
       setError(error.message || '注册失败，请稍后再试');
@@ -57,9 +57,9 @@ export default function Register() {
   };
   
   return (
-    <Layout title="注册 | 简易博客平台">
+    <Layout title="Register | Birdie Blog">
       <div className="max-w-md mx-auto">
-        <h1 className="text-2xl font-bold mb-6 text-center">创建新账户</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Create New Account</h1>
         
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -70,7 +70,7 @@ export default function Register() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block mb-1">
-              用户名
+              Username
             </label>
             <input
               type="text"
@@ -85,7 +85,7 @@ export default function Register() {
           
           <div>
             <label htmlFor="email" className="block mb-1">
-              电子邮箱
+              Email
             </label>
             <input
               type="email"
@@ -100,7 +100,7 @@ export default function Register() {
           
           <div>
             <label htmlFor="password" className="block mb-1">
-              密码
+              Password
             </label>
             <input
               type="password"
@@ -115,7 +115,7 @@ export default function Register() {
           
           <div>
             <label htmlFor="confirmPassword" className="block mb-1">
-              确认密码
+              Confirm Password
             </label>
             <input
               type="password"
@@ -133,14 +133,14 @@ export default function Register() {
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
             disabled={loading}
           >
-            {loading ? '注册中...' : '注册'}
+            {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
         
         <p className="mt-4 text-center">
-          已有账户？
+          Already have an account?
           <Link href="/login" className="text-blue-600 hover:underline ml-1">
-            登录
+            Login
           </Link>
         </p>
       </div>
